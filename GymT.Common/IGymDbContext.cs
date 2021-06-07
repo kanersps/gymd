@@ -1,7 +1,7 @@
-using GymD.Common.Accounts;
+using GymT.Common.Accounts;
 using Microsoft.EntityFrameworkCore;
 
-namespace GymD.Common
+namespace GymT.Common
 {
     public interface IGymDbContext
     {

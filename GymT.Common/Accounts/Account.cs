@@ -1,4 +1,4 @@
-namespace GymD.Common.Accounts
+namespace GymT.Common.Accounts
 {
     public class Account
     {

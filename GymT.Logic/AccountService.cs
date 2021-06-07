@@ -1,7 +1,7 @@
-using GymD.Common;
-using GymD.Common.Accounts;
+using GymT.Common;
+using GymT.Common.Accounts;
 
-namespace GymD.Logic
+namespace GymT.Logic
 {
     public class AccountService
     {
