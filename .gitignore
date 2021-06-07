@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=vue,dotnetcore,rider,webstorm,node
 
 # MacOS
+.DS_Store
 
 ### DotnetCore ###
 # .NET Core build folders
