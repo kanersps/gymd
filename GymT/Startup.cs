@@ -34,25 +34,29 @@ namespace GymT
             {
                 options.RootPath = "frontend/dist";
             });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSpaStaticFiles();
-            app.UseSpa(options =>
-            {
-                if (env.IsDevelopment())
-                {
-                    Console.WriteLine("Test");
-                    options.UseProxyToSpaDevelopmentServer("http://localhost:8080");
-                }
-            });
-
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(cors =>
+            {
+                cors.AllowAnyOrigin();
+                cors.AllowAnyHeader();
+                cors.AllowAnyMethod();
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

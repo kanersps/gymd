@@ -3,8 +3,18 @@
 </template>
 
 <script>
+
+import AppStore from "@/store/AppStore";
+
 export default {
-name: "Account"
+name: "Account",
+  beforeRouteEnter(to, from, next) {
+    if(!AppStore.state.loggedIn && to.path !== "/account/login") {
+      next('/account/login')
+    } else {
+      next();
+    }
+  }
 }
 </script>
 
