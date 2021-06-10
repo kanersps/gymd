@@ -2,7 +2,7 @@
   <div class="grid-cols-1 md:grid-cols-2 h-full grid items-center">
     <div class="text-center p-4 mb-8">
       <div class="text-4xl font-bold mb-3">
-        <span class="border-dotted font-light">Gym<span class="text-yellow-500 font-bold">T</span></span>
+        <span class="font-light">Gym<span class="text-indigo-600 font-bold">T</span></span>
       </div>
       <div class="text-4xl font-bold">Learning Fitness Tracker</div>
       <div class="text-xl mt-2">Advanced fitness tracking app that will help you reach your goals using machine
