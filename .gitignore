@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/vue,dotnetcore,rider,webstorm,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=vue,dotnetcore,rider,webstorm,node
 
+# Temporary DB files
+*.db
+
 # MacOS
 .DS_Store
 
