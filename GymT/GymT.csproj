@@ -9,11 +9,16 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0-preview.4.21253.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-preview.4.21253.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0-preview.4.21253.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GymT.Data\GymT.Data.csproj" />
+    <ProjectReference Include="..\GymT.Logic\GymT.Logic.csproj" />
   </ItemGroup>
 
   <ItemGroup>

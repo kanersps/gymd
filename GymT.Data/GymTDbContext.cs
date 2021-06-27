@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymT.Data
 {
-    public class GymDbContext : DbContext, IGymDbContext
+    public class GymTDbContext : DbContext, IGymTDbContext
     {
         public DbSet<Account> Accounts { get; set; }
 
-        public GymDbContext(DbContextOptions<GymDbContext> options) : base(options)
+        public GymTDbContext(DbContextOptions<GymTDbContext> options) : base(options)
         {
             
         }

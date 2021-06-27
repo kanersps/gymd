@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GymT.Common;
 using GymT.Data;
+using GymT.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 
 namespace GymT
 {
@@ -20,16 +23,22 @@ namespace GymT
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GymDbContext>(options =>
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
-                options.UseSqlite("Data Source=gymt.db;");
-            });
-            
+                services.AddDbContext<IGymTDbContext, GymTDbContext>(options => { options.UseSqlite("Data Source=gymt.db;"); });
+            }
+            else
+            {
+                throw new Exception("Currently GymT only runs in development mode");
+            }
+
+            services.AddTransient<AccountService>();
+
             services.AddSpaStaticFiles(options =>
             {
                 options.RootPath = "frontend/dist";

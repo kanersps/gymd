@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymT.Common
 {
-    public interface IGymDbContext
+    public interface IGymTDbContext
     {
         public DbSet<Account> Accounts { get; set; }
+        public int SaveChanges();
     }
 }
