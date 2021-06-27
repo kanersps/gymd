@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=vue,dotnetcore,rider,webstorm,node
 
 # Temporary DB files
-*.db
+*.db*
 
 # MacOS
 .DS_Store
