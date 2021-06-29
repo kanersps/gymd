@@ -5,7 +5,7 @@
       <div class="p-3 mt-10 pt-10 w-full md:w-1/3">
         <div class="text-4xl border-indigo-500 border-b-2 pb-2">Register</div>
 
-        <form @submit="submitForm" class="grid grid-cols-1 gap-3 flex mt-4 w-full">
+        <form @submit="submitForm" class="grid grid-cols-1 gap-3 mt-4 w-full">
           <label class="block text-gray-700 text-sm font-bold" for="nickname">Nickname</label>
           <input
             v-model="nickname"
