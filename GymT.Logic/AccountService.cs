@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using GymT.Common;
 using GymT.Common.Accounts;
@@ -91,6 +92,13 @@ namespace GymT.Logic
             _context.SaveChanges();
 
             return AccountError.NoError;
+        }
+
+        public AccountDashboard GetDashboard(Guid id)
+        {
+            Account account = _context.Accounts.FirstOrDefault(account => account.Id == id);
+
+            return account.GetDashboard();
         }
     }
 }

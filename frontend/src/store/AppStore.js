@@ -1,15 +1,17 @@
-import { createStore } from 'vuex';
+import {createStore} from 'vuex';
+import * as Authentication from "./actions/Authentication";
 
 const store = createStore({
     state() {
         return {
-            loggedIn: false
+            ...Authentication.State
         }
     },
     mutations: {
-        setLoggedIn(state, payload) {
-            state.loggedIn = payload;
-        }
+        ...Authentication.Mutations
+    },
+    actions: {
+        ...Authentication.Actions
     }
 });
 

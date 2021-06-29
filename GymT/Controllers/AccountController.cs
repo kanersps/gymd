@@ -1,4 +1,5 @@
 using System;
+using GymT.Attributes;
 using GymT.Common.Errors;
 using GymT.Common.View.Account;
 using GymT.Logic;
@@ -27,5 +28,13 @@ namespace GymT.Controllers
         {
             return _accountService.Login(account.Email, account.Password);
         }
+
+        [HttpGet("dashboard")]
+        [Authenticated]
+        public ActionResult<AccountDashboard> Dashboard()
+        {
+            return _accountService.GetDashboard((Guid) HttpContext.Items["AccountId"]);
+        }
+        
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using GymT.Common.View.Account;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GymT.Common.Accounts
@@ -28,6 +29,14 @@ namespace GymT.Common.Accounts
             
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public AccountDashboard GetDashboard()
+        {
+            return new AccountDashboard()
+            {
+                Nickname = Nickname
+            };
         }
     }
 }

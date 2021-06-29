@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GymT.Common;
 using GymT.Data;
 using GymT.Logic;
+using GymT.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 
 namespace GymT
 {
@@ -61,6 +61,8 @@ namespace GymT
                 cors.AllowAnyHeader();
                 cors.AllowAnyMethod();
             });
+
+            app.UseMiddleware<AuthenticationMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

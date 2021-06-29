@@ -3,21 +3,28 @@
 </template>
 
 <script>
-
 import AppStore from "@/store/AppStore";
 
 export default {
-name: "Account",
+  name: "Account",
   beforeRouteEnter(to, from, next) {
-    if(!AppStore.state.loggedIn && to.path !== "/account/login") {
-      next('/account/login')
+    if (AppStore.state.loggedIn) {
+      if (to.path == "/account/register" || to.path == "/account/login" || to.path == "/account") {
+        next("/account/dashboard");
+      } else {
+        next();
+      }
     } else {
-      next();
+      console.log(to.path);
+      if (to.path == "/account/register" || to.path == "/account/login") {
+        next();
+      } else {
+        next("/account/login");
+      }
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-
 </style>
