@@ -6,7 +6,7 @@ import Home from "@/main/home/Home.vue";
 import Account from "@/main/account/Account";
 import Register from "@/main/account/Register";
 import Login from "@/main/account/Login";
-import Dashboard from "@/main/account/Dashboard";
+import Dashboard from "@/main/account/Dashboard/Dashboard";
 
 const routes = [{
         path: "/",

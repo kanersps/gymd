@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavMenu></NavMenu>
     <div class="absolute z-10 top-0 left-0 w-full h-full from-green-400 to-blue-500 bg-gradient-to-bl bg-gradient-from-tr" />
     <div class="flex justify-center z-20 absolute top-14 bottom-0 bg-white w-full">
       <div class="p-3 mt-10 pt-10 absolute w-full md:w-1/3">
@@ -46,6 +47,7 @@
 </template>
 
 <script>
+import NavMenu from "../../components/navigation/NavMenu.vue";
 import Button from "@/components/ui/Button";
 import Error from "../../components/ui/Error";
 import * as Authentication from "../../store/actions/Authentication";
@@ -53,7 +55,7 @@ import AccountErrors from "../../store/errors/AccountErrors";
 
 export default {
   name: "Login",
-  components: { Error, Button },
+  components: { Error, Button, NavMenu },
   data: function () {
     return {
       email: "",
@@ -72,7 +74,7 @@ export default {
   },
   computed: {
     loginError() {
-      return AccountErrors[this.$store.state.loginError] ? AccountErrors[this.$store.state.loginError] : "";
+      return AccountErrors[this.$store.state.loginError] ? AccountErrors[this.$store.state.loginError] : this.$store.state.loginError;
     },
     loggingIn() {
       return this.$store.state.loggingIn;

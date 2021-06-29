@@ -17,7 +17,9 @@ export default {
                 ...authenticated
             },
             body: JSON.stringify(data)
-        }).then(response => response.json())
+        }).catch().then(response => {
+            return response.json();
+        });
     },
     get(endpoint, data) {
         const authenticated = {};
@@ -33,6 +35,6 @@ export default {
                 ...authenticated
             },
             body: JSON.stringify(data)
-        }).then(response => response.json())
+        }).catch().then(response => response.json());
     }
 }

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavMenu></NavMenu>
     <div class="absolute z-10 top-0 left-0 w-full h-full from-green-400 to-blue-500 bg-gradient-to-bl bg-gradient-from-tr" />
     <div class="flex justify-center z-20 absolute top-14 bottom-0 bg-white w-full">
       <div class="p-3 mt-10 pt-10 w-full md:w-1/3">
@@ -88,6 +89,7 @@
 
 <script>
 /* eslint-disable no-unused-vars */
+import NavMenu from "../../components/navigation/NavMenu.vue";
 import Button from "@/components/ui/Button";
 import Error from "@/components/ui/Error";
 import api from "../../api";
@@ -96,7 +98,7 @@ const MailRegex = new RegExp(/^[^\s@]+@[^\s@]+$/);
 
 export default {
   name: "Register",
-  components: { Error, Button },
+  components: { Error, Button, NavMenu },
   data: function () {
     return {
       nickname: "",

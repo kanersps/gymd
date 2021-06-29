@@ -48,9 +48,9 @@ export const Actions = {
             }
 
             commit('setLoggingIn', false);
-
-        }).catch(error => {
-            console.log(error);
+        }).catch(e => {
+            commit('setLoggingIn', false);
+            commit('setLoginError', "We were unable to connect to GymT, raw message: " + String(e))
         })
     }
 }

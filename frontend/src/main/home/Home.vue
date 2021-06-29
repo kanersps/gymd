@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavMenu></NavMenu>
     <div class="grid-cols-1 absolute left-0 right-0 from-green-400 to-blue-500 bg-gradient-to-bl bg-gradient-from-tr md:grid-cols-2 grid md:pl-10 md:pr-10 xl:pl-32 xl:pr-32 pt-36 top-0 bottom-20">
       <div class="p-4 mb-8">
         <div class="text-4xl font-bold">A Learning Fitness Tracker</div>
@@ -19,7 +20,7 @@
         <div class="absolute w-full top-0 bottom-32 cover rounded-xl"></div>
       </div>
     </div>
-    <div class="absolute bottom-20">
+    <div class="absolute bottom-20 w-full z-30">
       <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g transform="translate(-2.000000, 44.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -49,8 +50,11 @@
 </template>
 
 <script>
+import NavMenu from "../../components/navigation/NavMenu.vue";
+
 export default {
   name: "Home",
+  components: { NavMenu },
 };
 </script>
 
