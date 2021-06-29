@@ -9,6 +9,9 @@
           <router-link to="/account/register">
             <button class="bg-white hover:bg-indigo-500 hover:text-white duration-150 transition-all pl-5 pr-5 pt-2 pb-2 rounded-xl font-semibold text-xl">Start Now</button>
           </router-link>
+          <router-link to="/account/login">
+            <button class="duration-150 border-green-400 border-b-2 hover:border-blue-500 transition-all pl-5 pr-5 pt-2 pb-2 text-xl">I already have an account</button>
+          </router-link>
         </div>
       </div>
 
