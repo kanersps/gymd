@@ -3,7 +3,7 @@
     <Menu></Menu>
 
     <div class="p-10 bg-gray-100">
-      <Toolbar />
+      <Toolbar :nickname="nickname" />
 
       <Overview />
     </div>

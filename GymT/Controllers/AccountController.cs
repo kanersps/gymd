@@ -35,6 +35,16 @@ namespace GymT.Controllers
         {
             return _accountService.GetDashboard((Guid) HttpContext.Items["AccountId"]);
         }
+
+        [HttpGet("authenticated")]
+        [Authenticated]
+        public ActionResult<AuthenticationResponse> Authenticated()
+        {
+            return new AuthenticationResponse()
+            {
+                Success = true
+            };
+        }
         
     }
 }

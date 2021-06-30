@@ -42,6 +42,8 @@ export const Actions = {
                 commit('setToken', response.token);
                 commit('setLoggedIn', true);
 
+                localStorage.setItem("token", response.token);
+
                 router.push('/account/dashboard');
             } else {
                 commit('setLoginError', response.error)

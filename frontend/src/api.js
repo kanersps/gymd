@@ -4,7 +4,9 @@ const apiUrl = "http://localhost:5000/api/"
 
 export default {
     post(endpoint, data) {
-        const authenticated = {};
+        const authenticated = {
+            Authorization: store.state.token
+        };
 
         if (store.state.loggedIn) {
             authenticated.Authorization = store.state.token;
@@ -22,11 +24,9 @@ export default {
         });
     },
     get(endpoint, data) {
-        const authenticated = {};
-
-        if (store.state.loggedIn) {
-            authenticated.Authorization = store.state.token;
-        }
+        const authenticated = {
+            Authorization: store.state.token
+        };
 
         return fetch(apiUrl + endpoint, {
             method: "GET",

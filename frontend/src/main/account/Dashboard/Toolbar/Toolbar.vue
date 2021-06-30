@@ -6,7 +6,7 @@
     </div>
     <div class="flex items-center p-1 pl-4 pr-4 cursor-pointer hover:bg-gray-100 transition-all duration-75 rounded">
       <div class="inline">
-        {{ nickname || "Kane" }}
+        {{ nickname }}
       </div>
       <div class="inline ml-4 rounded-full bg-indigo-200 pt-0.5 pb-0.5 pr-1 pl-1">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,6 +22,7 @@ import ToolbarItem from "./ToolbarItem.vue";
 
 export default {
   components: { ToolbarItem },
+  props: ["nickname"],
   computed: {
     currentTab: function () {
       return "";
