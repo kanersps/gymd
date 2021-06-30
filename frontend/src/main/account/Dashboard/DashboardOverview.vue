@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
-    <div class="h-96 p-3 bg-white shadow-md rounded mt-3">
+    <div class="h-96 p-3 bg-white shadow-md rounded">
       <span class="font-semibold text-gray-800">Recent Activity</span>
       <div class="mt-2">
         <div class="grid activity-log mt-2">
@@ -62,12 +62,12 @@
         </div>
       </div>
     </div>
-    <div class="h-96 p-3 bg-white shadow-md rounded mt-3 col-span-2">
+    <div class="h-96 p-3 bg-white shadow-md rounded col-span-2">
       <span class="font-semibold text-gray-800">Your Exercises</span>
     </div>
-    <div class="h-96 p-3 bg-white shadow-md rounded mt-3"></div>
-    <div class="h-96 p-3 bg-white shadow-md rounded mt-3"></div>
-    <div class="h-96 p-3 bg-white shadow-md rounded mt-3"></div>
+    <div class="h-96 p-3 bg-white shadow-md rounded"></div>
+    <div class="h-96 p-3 bg-white shadow-md rounded"></div>
+    <div class="h-96 p-3 bg-white shadow-md rounded"></div>
   </div>
 </template>
 

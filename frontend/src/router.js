@@ -7,6 +7,11 @@ import Account from "@/main/account/Account";
 import Register from "@/main/home/Register";
 import Login from "@/main/home/Login";
 import Dashboard from "@/main/account/Dashboard/Dashboard";
+import DashboardExercises from "@/main/account/Dashboard/DashboardExercises";
+import DashboardOverview from "@/main/account/Dashboard/DashboardOverview";
+import Friends from "@/main/account/Friends/Friends";
+import Exercises from "@/main/account/Exercises/Exercises";
+import Achievements from "@/main/account/Achievements/Achievements";
 
 const routes = [{
         path: "/",
@@ -26,7 +31,23 @@ const routes = [{
         component: Account,
         children: [{
             path: "dashboard",
-            component: Dashboard
+            component: Dashboard,
+            children: [{
+                path: "",
+                component: DashboardOverview
+            }, {
+                path: "exercises",
+                component: DashboardExercises
+            }]
+        }, {
+            path: "exercises",
+            component: Exercises
+        }, {
+            path: "friends",
+            component: Friends
+        }, {
+            path: "achievements",
+            component: Achievements
         }]
     },
 ];

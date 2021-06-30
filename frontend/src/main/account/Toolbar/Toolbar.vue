@@ -1,9 +1,7 @@
 <template>
-  <div class="shadow-md w-full bg-white flex items-center rounded-xl pt-3 pb-3 pl-5 pr-5">
-    <div class="flex flex-1">
-      <ToolbarItem :selected="true">Overview</ToolbarItem>
-      <ToolbarItem :selected="false">Exercises</ToolbarItem>
-    </div>
+  <div class="shadow-md w-full bg-white flex items-center rounded-xl pt-3 pb-3 pl-5 pr-5 mb-3">
+    <ToolbarItems />
+
     <div class="profile-context flex items-center transition-all duration-75 relative rounded">
       <div class="flex items-center rounded cursor-pointer hover:bg-gray-100 p-1 pl-4 pr-4">
         <div class="inline">
@@ -41,20 +39,22 @@
 </style>
 
 <script>
-import ToolbarItem from "./ToolbarItem.vue";
+import ToolbarItems from "./ToolbarItems.vue";
 import * as Authentication from "@/store/actions/Authentication";
 
 export default {
-  components: { ToolbarItem },
+  components: { ToolbarItems },
   data: function () {
     return {
       showContextMenu: false,
     };
   },
-  props: ["nickname"],
   computed: {
     currentTab: function () {
       return "";
+    },
+    nickname: function () {
+      return this.$store.state.nickname;
     },
   },
   methods: {

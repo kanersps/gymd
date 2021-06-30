@@ -10,7 +10,8 @@ export const State = {
     loggedIn: false,
     loggingIn: false,
     token: "",
-    loginError: ""
+    loginError: "",
+    nickname: ""
 }
 
 export const Mutations = {
@@ -25,6 +26,9 @@ export const Mutations = {
     },
     setLoggingIn(state, payload) {
         state.loggingIn = payload;
+    },
+    setNickname(state, payload) {
+        state.nickname = payload;
     }
 }
 
