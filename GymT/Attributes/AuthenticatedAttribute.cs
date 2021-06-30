@@ -11,10 +11,11 @@ namespace GymT.Attributes
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            Guid accountId = (Guid)context.HttpContext.Items["AccountId"];
-            
-            if (accountId == Guid.Empty)
-                context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+            if (context.HttpContext.Items["AccountId"] == null)
+            {
+                context.Result = new JsonResult(new {message = "Unauthorized"})
+                    {StatusCode = StatusCodes.Status401Unauthorized};
+            }
         }
     }
 }
