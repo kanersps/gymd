@@ -2,7 +2,8 @@ import api from "../../api";
 import router from "../../router";
 
 export const ACTIONS = Object.freeze({
-    LOGIN: "AUTHENTICATION_LOGIN"
+    LOGIN: "AUTHENTICATION_LOGIN",
+    LOGOUT: "AUTHENTICATION_LOGOUT",
 })
 
 export const State = {
@@ -54,5 +55,12 @@ export const Actions = {
             commit('setLoggingIn', false);
             commit('setLoginError', "We were unable to connect to GymT, raw message: " + String(e))
         })
+    },
+    [ACTIONS.LOGOUT]({
+        commit
+    }) {
+        commit("setLoggedIn", false);
+        localStorage.removeItem("token");
+        router.push('/login');
     }
 }

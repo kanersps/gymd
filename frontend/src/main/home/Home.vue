@@ -3,15 +3,17 @@
     <NavMenu></NavMenu>
     <div class="grid-cols-1 absolute left-0 right-0 from-green-400 to-blue-500 bg-gradient-to-bl bg-gradient-from-tr md:grid-cols-2 grid md:pl-10 md:pr-10 xl:pl-32 xl:pr-32 pt-36 top-0 bottom-20">
       <div class="p-4 mb-8">
-        <div class="text-4xl font-bold">A Learning Fitness Tracker</div>
-        <div class="text-2xl mt-2">Advanced fitness tracking app that will help you reach your goals using machine learning. Try our application to help yourself!</div>
+        <div class="text-4xl color font-bold">A Learning Fitness Tracker</div>
+        <div class="text-2xl color mt-2">Advanced fitness tracking app that will help you reach your goals using machine learning. Try our application to help yourself!</div>
 
         <div class="inline-flex gap-3 mt-5">
           <router-link to="/account/register">
             <button class="bg-white hover:bg-indigo-500 hover:text-white duration-150 transition-all pl-5 pr-5 pt-2 pb-2 rounded-xl font-semibold text-xl">Start Now</button>
           </router-link>
           <router-link to="/account/login">
-            <button class="duration-150 border-green-400 border-b-2 hover:border-blue-500 transition-all pl-5 pr-5 pt-2 pb-2 text-xl">I already have an account</button>
+            <button class="duration-150 border-green-400 border-b-2 hover:border-blue-500 transition-all pl-5 pr-5 pt-2 pb-2 text-xl">
+              <span class="color">I already have an account</span>
+            </button>
           </router-link>
         </div>
       </div>
@@ -63,5 +65,10 @@ export default {
   background-image: url("../../assets/cover.png");
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.color {
+  color: white;
+  filter: invert(1) grayscale(1) contrast(9);
 }
 </style>
