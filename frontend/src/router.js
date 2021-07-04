@@ -11,6 +11,8 @@ import DashboardExercises from "@/main/account/Dashboard/DashboardExercises";
 import DashboardOverview from "@/main/account/Dashboard/DashboardOverview";
 import Friends from "@/main/account/Friends/Friends";
 import Exercises from "@/main/account/Exercises/Exercises";
+import ExercisesOverview from "@/main/account/Exercises/ExercisesOverview";
+import ExerciseEditor from "@/main/account/Exercises/ExerciseEditor/ExerciseEditor";
 import Achievements from "@/main/account/Achievements/Achievements";
 
 const routes = [{
@@ -41,7 +43,14 @@ const routes = [{
             }]
         }, {
             path: "exercises",
-            component: Exercises
+            component: Exercises,
+            children: [{
+                path: "",
+                component: ExercisesOverview
+            }, {
+                path: "create",
+                component: ExerciseEditor
+            }]
         }, {
             path: "friends",
             component: Friends

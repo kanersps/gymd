@@ -1,5 +1,8 @@
-import {createStore} from 'vuex';
+import {
+    createStore
+} from 'vuex';
 import * as Authentication from "./actions/Authentication";
+import * as Exercise from "./actions/Exercise";
 
 const store = createStore({
     state() {
@@ -11,7 +14,8 @@ const store = createStore({
         ...Authentication.Mutations
     },
     actions: {
-        ...Authentication.Actions
+        ...Authentication.Actions,
+        ...Exercise.Actions
     }
 });
 

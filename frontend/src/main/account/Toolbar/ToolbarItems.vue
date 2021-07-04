@@ -22,6 +22,16 @@ export default {
             path: "exercises",
           },
         ],
+        "/account/exercises": [
+          {
+            name: "Overview",
+            path: "",
+          },
+          {
+            name: "Create Exercise",
+            path: "create",
+          },
+        ],
       },
     };
   },

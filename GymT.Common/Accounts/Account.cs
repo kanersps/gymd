@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using GymT.Common.Exercises;
 using GymT.Common.View.Account;
+using GymT.Common.View.Exercises;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GymT.Common.Accounts
@@ -13,6 +17,7 @@ namespace GymT.Common.Accounts
         public string Nickname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public List<Exercise> Exercises { get; set; } = new();
 
         public string GenerateToken()
         {
@@ -37,6 +42,34 @@ namespace GymT.Common.Accounts
             {
                 Nickname = Nickname
             };
+        }
+
+        public ExerciseCreatorError CreateExercise(ExerciseCreate exerciseCreate, ExerciseEquipment equipment)
+        {
+            Exercise exercise = new Exercise()
+            {
+                Equipment = equipment,
+                Name = exerciseCreate.Name,
+                Author = this
+            };
+            
+            List<ExerciseMove> Moves = exerciseCreate.Moves.Select((move, index) => new ExerciseMove()
+            {
+                DefaultAmount = move.DefaultAmount,
+                Name = move.Name,
+                Instructions = move.Instructions,
+                Order = index,
+                QuantityType = move.QuantityType,
+                ExerciseMoveUsers = new List<ExerciseMoveUser>(),
+                Exercise = exercise,
+                DefaultRepetitions = move.DefaultRepetitions
+            }).ToList();
+
+            exercise.Moves = Moves;
+            
+            Exercises.Add(exercise);
+
+            return ExerciseCreatorError.NoError;
         }
     }
 }

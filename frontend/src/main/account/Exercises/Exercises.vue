@@ -1,5 +1,5 @@
 <template>
-  <div>Unimplemented</div>
+  <router-view />
 </template>
 
 <script>

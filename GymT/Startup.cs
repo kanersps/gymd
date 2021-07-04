@@ -38,6 +38,7 @@ namespace GymT
             }
 
             services.AddTransient<AccountService>();
+            services.AddTransient<ExerciseService>();
 
             services.AddSpaStaticFiles(options =>
             {
