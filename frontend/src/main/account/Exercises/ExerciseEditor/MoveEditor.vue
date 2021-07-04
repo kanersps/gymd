@@ -4,7 +4,7 @@
 
     <form @submit="createMove">
       <div class="mb-4">
-        <label for="move_name" class="block text-gray-700 text-sm font-semibold mb-2">Move Name</label>
+        <label for="move_name" class="block text-gray-700 text-sm font-semibold mb-2">Move Name <span class="text-red-600">*</span></label>
         <input v-model="move.name" id="move_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
       </div>
 
@@ -14,20 +14,29 @@
       </div>
 
       <div class="mb-4">
-        <label for="move_quantity" class="block text-gray-700 text-sm font-semibold mb-2">Quantity Type</label>
+        <label for="move_quantity" class="text-gray-700 text-sm font-semibold mb-2 w-full flex justify-between">
+          <span>Quantity Type <span class="text-red-600">*</span></span>
+          <InfoHover>Set if this move is about weight or time (ex: you rest in seconds, or bench press with weight)</InfoHover>
+        </label>
         <select v-model="move.quantityType" id="move_quantity" class="w-full shadow border py-2 px-3">
-          <option :value="0">Seconds</option>
           <option :value="1">Kilo</option>
+          <option :value="0">Seconds</option>
         </select>
       </div>
 
       <div class="mb-4">
-        <label for="move_amount" class="block text-gray-700 text-sm font-semibold mb-2">Default Amount</label>
+        <label for="move_amount" class="text-gray-700 text-sm font-semibold mb-2 w-full flex justify-between">
+          <span>Default Amount <span class="text-red-600">*</span></span>
+          <InfoHover>How many kilo or seconds is the default for this move</InfoHover>
+        </label>
         <input v-model="move.defaultAmount" id="move_amount" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
       </div>
 
       <div class="mb-4">
-        <label for="move_repetitions" class="block text-gray-700 text-sm font-semibold mb-2">Default Repetitions</label>
+        <label for="move_repetitions" class="text-gray-700 text-sm font-semibold mb-2 w-full flex justify-between">
+          <span>Default Repetitions <span class="text-red-600">*</span></span>
+          <InfoHover>How many repetitions is default for this move</InfoHover>
+        </label>
         <input
           v-model="move.defaultRepetitions"
           id="move_repetitions"
@@ -44,14 +53,17 @@
 </template>
 
 <script>
+import InfoHover from "../../../../components/ui/InfoHover.vue";
+
 export default {
+  components: { InfoHover },
   props: ["addMove", "addingMove", "setAddingMove"],
   data() {
     return {
       move: {
         name: "",
         instructions: "",
-        quantityType: 0,
+        quantityType: 1,
         defaultAmount: 0,
         defaultRepetitions: 0,
       },

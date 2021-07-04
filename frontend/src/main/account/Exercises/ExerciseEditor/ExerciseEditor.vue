@@ -6,12 +6,15 @@
         <div class="flex flex-col">
           <div class="flex-grow">
             <div class="mb-4">
-              <label for="exercise_name" class="block text-gray-700 text-sm font-semibold mb-2">Exercise Name</label>
+              <label for="exercise_name" class="block text-gray-700 text-sm font-semibold mb-2">Exercise Name <span class="text-red-600">*</span></label>
               <input v-model="exercise.name" id="exercise_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
 
             <div class="mb-4">
-              <label for="exercise_type" class="block text-gray-700 text-sm font-semibold mb-2 w-full">Exercise Type</label>
+              <label for="exercise_type" class="text-gray-700 text-sm font-semibold mb-2 w-full flex justify-between">
+                <span>Exercise Type <span class="text-red-600">*</span></span>
+                <InfoHover>Select what type of equipment this exercise will use</InfoHover>
+              </label>
               <select v-model="exercise.type" id="exercise_type" class="w-full shadow border py-2 px-3">
                 <option :value="0">No Equipment</option>
                 <option :value="1">Machine</option>
@@ -19,17 +22,43 @@
               </select>
             </div>
 
-            <div v-show="exercise.type !== 0" class="mb-4 relative">
-              <label for="exercise_equipment" class="block text-gray-700 text-sm font-semibold mb-2 w-full">Equipment</label>
-              <input v-on:keydown="searchKeyDownAutoComplete" v-model="exercise.equipment" id="exercise_equipment" class="w-full shadow border py-2 px-3" />
+            <OnClickOutside @trigger="close" v-show="exercise.type !== 0" class="mb-4 relative">
+              <label for="exercise_equipment" class="text-gray-700 text-sm font-semibold mb-2 w-full flex justify-between">
+                <span>Equipment <span class="text-red-600">*</span></span>
+                <InfoHover>Start typing to find equipment, if your equipment wasn't found you can enter your own</InfoHover>
+              </label>
+              <input
+                v-on:focus="exerciseSearch.search = true"
+                autocomplete="off"
+                v-on:keydown="searchKeyDownAutoComplete"
+                v-model="exercise.equipment"
+                id="exercise_equipment"
+                class="w-full shadow border py-2 px-3"
+              />
 
-              <div v-show="searching" class="bg-white shadow-lg hover:bg-gray-200 cursor-pointer absolute w-full px-3 py-2" id="equipment_results">
-                <div class="" @click="exercise.equipment = 'Dumbell'">Dumbell</div>
+              <div v-show="exerciseSearch.search" class="bg-white shadow-lg hover:bg-gray-200 cursor-pointer absolute w-full px-3 py-2" id="equipment_results">
+                <div v-if="exerciseSearch.searching">Searching...</div>
+                <div v-else-if="exerciseSearch.searching === false && exerciseSearch.results.length === 0">Try typing to get results</div>
+                <div
+                  v-else
+                  v-for="result in exerciseSearch.results"
+                  :key="result"
+                  class=""
+                  @click="
+                    exercise.equipment = result;
+                    exerciseSearch.search = false;
+                  "
+                >
+                  {{ result }}
+                </div>
               </div>
-            </div>
+            </OnClickOutside>
 
             <div class="mb-4">
-              <label for="exercise_moves" class="block text-gray-700 text-sm font-semibold mb-2">Exercise Moves</label>
+              <label for="exercise_moves" class="text-gray-700 text-sm font-semibold mb-2 w-full flex justify-between">
+                <span>Exercise Moves <span class="text-red-600">*</span></span>
+                <InfoHover>Add here which 'moves' your exercise consists of</InfoHover>
+              </label>
               <div class="flex justify-between">
                 <span v-show="exercise.moves.length == 0">No moves have been added to this exercise</span>
                 <span v-show="exercise.moves.length > 0">{{ exercise.moves.length }} moves have been added to this exercise</span>
@@ -79,8 +108,26 @@
             </div>
           </div>
 
+          <div class="mb-4 flex w-full h-14">
+            <Error :message="exerciseCreateError"></Error>
+          </div>
+
           <div class="mb-4 flex flex-shrink-0 justify-end">
-            <button type="submit" class="bg-green-500 text-white rounded px-3 py-2 w-full">Create Exercise</button>
+            <button
+              v-bind:disabled="addingExercise"
+              class="w-full relative rounded bg-green-500 text-white disabled:cursor-default hover:bg-green-400 cursor-pointer transition duration:100 text-white text-lg p-2"
+              type="submit"
+            >
+              <div class="relative items-center">
+                <span> Create Exercise </span>
+                <div class="absolute left-0 top-0">
+                  <svg v-show="addingExercise" class="animate-spin ml-1 mb-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
       </form>
@@ -99,9 +146,13 @@
 <script>
 import draggable from "vuedraggable";
 import MoveEditor from "./MoveEditor.vue";
+import api from "../../../../api";
+import { OnClickOutside } from "@vueuse/components";
+import InfoHover from "../../../../components/ui/InfoHover.vue";
+import Error from "../../../../components/ui/Error.vue";
 
 export default {
-  components: { draggable, MoveEditor },
+  components: { draggable, MoveEditor, OnClickOutside, InfoHover, Error },
   data() {
     return {
       exercise: {
@@ -113,6 +164,9 @@ export default {
       exerciseSearch: {
         completedValue: "",
         searching: false,
+        search: false,
+        searchTimer: null,
+        results: [],
       },
       addingMove: false,
       drag: false,
@@ -124,9 +178,12 @@ export default {
   },
   setup() {},
   methods: {
+    close() {
+      this.exerciseSearch.search = false;
+    },
     submit(event) {
-      console.log(this.exercise.moves);
       event.preventDefault();
+      this.addingExercise = true;
       this.$store.dispatch("CREATE_EXERCISE", {
         name: this.exercise.name,
         type: this.exercise.type,
@@ -158,10 +215,28 @@ export default {
           this.exercise.equipment = value;
           // set completedValue to the value
           this.exerciseSearch.completedValue = value;
+          // set search and searching to false
+          this.exerciseSearch.search = false;
+          this.exerciseSearch.searching = false;
           // prevent the default behavior
           event.preventDefault();
         }
+      } else {
+        clearInterval(this.exerciseSearch.searchTimer);
+        this.startSearchForEquipment(this.exercise.equipment);
       }
+    },
+    startSearchForEquipment(term) {
+      this.exerciseSearch.searching = true;
+      this.exerciseSearch.search = true;
+
+      // post to api to search for equipment
+      this.exerciseSearch.searchTimer = setTimeout(() => {
+        api.post("creator/search/equipment", term).then((results) => {
+          this.exerciseSearch.results = results;
+          this.exerciseSearch.searching = false;
+        });
+      }, 1000);
     },
   },
   computed: {
@@ -172,6 +247,12 @@ export default {
         disabled: false,
         ghostClass: "ghost",
       };
+    },
+    addingExercise() {
+      return this.$store.state.exerciseCreating;
+    },
+    exerciseCreateError() {
+      return this.$store.state.exerciseCreateError;
     },
   },
 };

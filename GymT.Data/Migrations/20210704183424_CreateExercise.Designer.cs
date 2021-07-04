@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymT.Data.Migrations
 {
     [DbContext(typeof(GymTDbContext))]
-    [Migration("20210704163139_CreateExercise")]
+    [Migration("20210704183424_CreateExercise")]
     partial class CreateExercise
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,9 @@ namespace GymT.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("AuthorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("EquipmentId")

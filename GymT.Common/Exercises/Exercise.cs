@@ -11,5 +11,6 @@ namespace GymT.Common.Exercises
         public string Name { get; set; }
         public ExerciseEquipment Equipment { get; set; }
         public List<ExerciseMove> Moves { get; set; }
+        public DateTime Created { get; set; }
     }
 }

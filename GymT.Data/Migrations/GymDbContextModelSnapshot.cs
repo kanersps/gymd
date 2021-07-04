@@ -45,6 +45,9 @@ namespace GymT.Data.Migrations
                     b.Property<Guid?>("AuthorId")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid?>("EquipmentId")
                         .HasColumnType("TEXT");
 

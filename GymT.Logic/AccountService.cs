@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using GymT.Common;
 using GymT.Common.Accounts;
 using GymT.Common.Errors;
 using GymT.Common.View.Account;
+using GymT.Common.View.Exercises;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymT.Logic
 {
@@ -99,6 +102,13 @@ namespace GymT.Logic
             Account account = _context.Accounts.FirstOrDefault(account => account.Id == id);
 
             return account.GetDashboard();
+        }
+
+        public ExerciseViewResponse GetUserExercises(Guid id, ExerciseViewRequest exerciseViewRequest)
+        {
+            Account account = _context.Accounts.Include(account => account.Exercises).ThenInclude(exercise => exercise.Equipment).FirstOrDefault(account => account.Id == id);
+
+            return account.GetExercises(exerciseViewRequest);
         }
     }
 }

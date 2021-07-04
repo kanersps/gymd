@@ -28,7 +28,8 @@ namespace GymT.Data.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     AuthorId = table.Column<Guid>(type: "TEXT", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    EquipmentId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    EquipmentId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

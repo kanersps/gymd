@@ -50,6 +50,7 @@ namespace GymT.Common.Accounts
             {
                 Equipment = equipment,
                 Name = exerciseCreate.Name,
+                Created = DateTime.UtcNow,
                 Author = this
             };
             
@@ -70,6 +71,22 @@ namespace GymT.Common.Accounts
             Exercises.Add(exercise);
 
             return ExerciseCreatorError.NoError;
+        }
+
+        public ExerciseViewResponse GetExercises(ExerciseViewRequest request)
+        {
+            List<ExerciseView> exerciseViews = Exercises.OrderBy(exercise => exercise.Created).Where(exercise => request.NextPage ? exercise.Created > request.LastView : exercise.Created < request.LastView).Take(10).Select(exercise => new ExerciseView()
+            {
+                Name = exercise.Name,
+                Equipment = exercise.Equipment?.Name,
+                Created = exercise.Created
+            }).ToList();
+
+            return new ExerciseViewResponse()
+            {
+                Pages = (int)Math.Ceiling(Exercises.Count / 10.0),
+                Exercises = exerciseViews
+            };
         }
     }
 }

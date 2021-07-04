@@ -7,11 +7,13 @@ import * as Exercise from "./actions/Exercise";
 const store = createStore({
     state() {
         return {
-            ...Authentication.State
+            ...Authentication.State,
+            ...Exercise.State
         }
     },
     mutations: {
-        ...Authentication.Mutations
+        ...Authentication.Mutations,
+        ...Exercise.Mutations
     },
     actions: {
         ...Authentication.Actions,

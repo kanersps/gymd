@@ -16,7 +16,14 @@ namespace GymT.Logic
         {
             _GymTDbContext = GymTDbContext;
         }
-        public ExerciseCreatorError CreateExercise(ExerciseCreate exerciseCreate, Guid AccountId)
+        
+        public List<string> FindEquipment(string term)
+        {
+            return _GymTDbContext.ExerciseEquipment.OrderBy(equipment => string.Compare(equipment.Name, term)).Select(equipment => equipment.Name).Take(5)
+                .ToList();
+        }
+        
+        public ExerciseCreationResponse CreateExercise(ExerciseCreate exerciseCreate, Guid AccountId)
         {
             ExerciseEquipment equipment = null;
             
@@ -45,7 +52,10 @@ namespace GymT.Logic
 
             _GymTDbContext.SaveChanges();
 
-            return ExerciseCreatorError.NoError;
+            return new ExerciseCreationResponse()
+            {
+                Success = true
+            };
         }
     }
 }
