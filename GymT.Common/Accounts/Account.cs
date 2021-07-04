@@ -79,7 +79,8 @@ namespace GymT.Common.Accounts
             {
                 Name = exercise.Name,
                 Equipment = exercise.Equipment?.Name,
-                Created = exercise.Created
+                Created = exercise.Created,
+                Id = exercise.Id.ToString()
             }).ToList();
 
             return new ExerciseViewResponse()
